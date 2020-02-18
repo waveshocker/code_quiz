@@ -1,9 +1,14 @@
 var startButton = document.querySelector("#start");
+var submitButton = document.querySelector('#Submit');
 
 var totalSeconds = 0;
+var answerKey = [1, 3, 1, 4, 2];
+var score = 0;
+var tracker = 0;
 
 function startTimer() {
     
+  event.preventDefault();
     totalSeconds = parseInt(document.getElementById("seconds").innerHTML);    
     interval = setInterval(function(){
       totalSeconds--;           
@@ -11,6 +16,7 @@ function startTimer() {
           
       if(totalSeconds === 0) {
         clearInterval(interval);
+        inputScore();
       }
     }, 1000);
   
@@ -20,10 +26,6 @@ function startTimer() {
   $($questions.get(currentQuestion)).fadeIn();
   }
  
-var answerKey = [1, 3, 1, 4, 2];
-var score = 0;
-var tracker = 0;
-
 startButton.addEventListener("click", startTimer);
 
 //Store the total number of questions
@@ -41,9 +43,8 @@ $questions.hide();
 //Show the first question
 //attach a click listener to the HTML element with the id of 'next'
 $('.option').click(function () {
+    event.preventDefault();
     var answerValue = $(this).attr('value');
-    console.log(answerValue);
-    console.log(answerKey[tracker]);
 
     if (parseInt(answerValue) === parseInt(answerKey[tracker])) {
       score++;
@@ -65,6 +66,8 @@ $('.option').click(function () {
 
         //if there are no more questions do stuff
         if (currentQuestion == totalQuestions) {
+          inputScore();
+          clearInterval(interval);
 
         } else {
             //otherwise show the next question
@@ -75,6 +78,14 @@ $('.option').click(function () {
 
 });
 
-function inputScore() {
-  
+function inputScore() {  
+  $questions.hide();
+  $form = $('<form align = "center"></form>');
+  $form.append('<input type ="text" name="Initials">')
+  $form.append('<input type="button" id="Submit" value="Submit">');
+  $('body').append($form);  
 }
+
+submitButton.click(function(){
+  
+})
