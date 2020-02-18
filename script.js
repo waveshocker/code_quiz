@@ -14,7 +14,11 @@ function startTimer() {
         alert("Time to take a break!");
       }
     }, 1000);
-    
+  
+  $('#Introduction').hide();
+  $('.buttons').hide();
+  
+  $($questions.get(currentQuestion)).fadeIn();
   }
  
 
@@ -33,10 +37,8 @@ $questions = $('.questions');
 $questions.hide();
 
 //Show the first question
-$($questions.get(currentQuestion)).fadeIn();
-
 //attach a click listener to the HTML element with the id of 'next'
-$('#next').click(function () {
+$('.option').click(function () {
 
     //fade out the current question,
     //putting a function inside of fadeOut calls that function 
