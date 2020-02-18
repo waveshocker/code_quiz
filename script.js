@@ -11,7 +11,6 @@ function startTimer() {
           
       if(totalSeconds === 0) {
         clearInterval(interval);
-        alert("Time to take a break!");
       }
     }, 1000);
   
@@ -21,6 +20,9 @@ function startTimer() {
   $($questions.get(currentQuestion)).fadeIn();
   }
  
+var answerKey = [1, 3, 1, 4, 2];
+var score = 0;
+var tracker = 0;
 
 startButton.addEventListener("click", startTimer);
 
@@ -39,7 +41,19 @@ $questions.hide();
 //Show the first question
 //attach a click listener to the HTML element with the id of 'next'
 $('.option').click(function () {
+    var answerValue = $(this).attr('value');
+    console.log(answerValue);
+    console.log(answerKey[tracker]);
 
+    if (parseInt(answerValue) === parseInt(answerKey[tracker])) {
+      score++;
+      tracker++;
+    }
+    else {
+      totalSeconds = totalSeconds - 20;
+      tracker++;
+    }
+    
     //fade out the current question,
     //putting a function inside of fadeOut calls that function 
     //immediately after fadeOut is completed, 
@@ -52,13 +66,7 @@ $('.option').click(function () {
         //if there are no more questions do stuff
         if (currentQuestion == totalQuestions) {
 
-            var result = sum_values()
-
-            //do stuff with the result
-            alert(result);
-
         } else {
-
             //otherwise show the next question
             $($questions.get(currentQuestion)).fadeIn();
 
@@ -66,3 +74,7 @@ $('.option').click(function () {
     });
 
 });
+
+function inputScore() {
+  
+}
