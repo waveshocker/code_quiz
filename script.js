@@ -97,7 +97,7 @@ function scoreInput(){
     user: name
   };
   highScores.push(points);
-  highScores.sort((a,b) => b.points - a.points);
+  highScores.sort((a,b) => b.point - a.point);
 
   localStorage.setItem("highScores", JSON.stringify(highScores));
   window.location.href="high_score.html";
