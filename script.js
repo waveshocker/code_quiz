@@ -1,5 +1,5 @@
 var startButton = document.querySelector("#start");
-var submitButton = document.querySelector('#Submit');
+
 
 var totalSeconds = 0;
 var answerKey = [1, 3, 1, 4, 2];
@@ -80,12 +80,16 @@ $('.option').click(function () {
 
 function inputScore() {  
   $questions.hide();
-  $form = $('<form align = "center"></form>');
+  $form = $('<form align = "center" id = "InputInitials"></form>');
   $form.append('<input type ="text" name="Initials">')
-  $form.append('<input type="button" id="Submit" value="Submit">');
-  $('body').append($form);  
-}
-
-submitButton.click(function(){
+  $form.append('<input type="button" id="Submit" onclick="scoreInput()" value="Submit">');
+  $('body').append($form);
   
-})
+}
+  
+function scoreInput(){
+  event.preventDefault();  
+  var name = document.getElementById('InputInitials').Initials.value;
+  localStorage.setItem("Initials", name);
+  localStorage.setItem("Score", score);
+}
