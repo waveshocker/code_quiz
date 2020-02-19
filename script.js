@@ -86,10 +86,19 @@ function inputScore() {
   $('body').append($form);
   
 }
-  
+
+const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
 function scoreInput(){
   event.preventDefault();  
   var name = document.getElementById('InputInitials').Initials.value;
-  localStorage.setItem("Initials", name);
-  localStorage.setItem("Score", score);
+  const points = {
+    point: score,
+    user: name
+  };
+  highScores.push(points);
+  highScores.sort((a,b) => b.points - a.points);
+
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+  window.location.href="high_score.html";
 }
